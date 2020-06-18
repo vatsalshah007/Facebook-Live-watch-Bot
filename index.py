@@ -40,8 +40,9 @@ class FB_live_bot():
             print(count)
     
     def live_watch(self):
+        sleep(2)
         search_ip = self.driver.find_element_by_class_name('_1frb')
-        search_ip.click()    
+        # search_ip.click()    
         search_ip.send_keys('LaLiga')
         sleep(3)
         # wait_1 = WebDriverWait(self.driver, 10)
@@ -49,19 +50,16 @@ class FB_live_bot():
         search_btn = self.driver.find_element_by_class_name('_585_')    
         search_btn.click()
         wait_2 = WebDriverWait(self.driver, 10)
-        element_2 = wait_2.until(EC.element_to_be_clickable((By.LINK_TEXT, 'LaLiga')))
+        element_2 = wait_2.until(EC.presence_of_element_located((By.LINK_TEXT, 'LaLiga')))
         la_liga_btn = self.driver.find_element_by_link_text('LaLiga')
         la_liga_btn.click()
         wait_3 = WebDriverWait(self.driver, 10)
-        try:
-            element_3 = wait_3.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="u_fetchstream_3_4"]/div[4]/a/span[1]')))
-            videos_btn = self.driver.find_element_by_xpath('//*[@id="u_fetchstream_3_4"]/div[4]/a/span[1]') 
-            videos_btn.click()
-        except Exception:
-            element_3 = wait_3.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="u_fetchstream_4_4"]/div[4]/a/span[1]')))
-            videos_btn = self.driver.find_element_by_xpath('//*[@id="u_fetchstream_4_4"]/div[4]/a/span[1]') 
-            videos_btn.click()
-            # self.driver.find_element_by_class_name('_2j04')
+        element_3 = wait_3.until(EC.element_to_be_clickable((By.CLASS_NAME, '_2yaa')))
+        left_nav = bot.driver.find_elements_by_class_name('_2yaa')[0:]
+        print(len(left_nav)) 
+        left_nav[3].click()
+        # videos_btn = self.driver.find_element_by_xpath('//*[@id="u_fetchstream_3_4"]/div[4]/a/span[1]') 
+        # videos_btn.click()
                
         wait_4 = WebDriverWait(self.driver, 10)
         element_4 = wait_4.until(EC.element_to_be_clickable((By.CLASS_NAME, 'du4w35lb')))
@@ -73,7 +71,28 @@ class FB_live_bot():
             self.driver.quit()
         else:
             team_name_videos_list[0].click()
-
+        wait_5 = WebDriverWait(self.driver, 10)
+        element_5 = wait_5.until(EC.presence_of_element_located((By.CLASS_NAME, '_ox1')))
+        volume_btn = self.driver.find_element_by_class_name('_rwt.img.sp_SbgeWlXTmvI.sx_f665dc')
+        volume_btn.click()
+        # video_hover = self.driver.find_element_by_class_name('_1c7d')
+        # video_hover.click()
+        setting_btn = self.driver.find_element_by_class_name('_2j04')
+        setting_btn.click()
+        quality_btn = self.driver.find_element_by_class_name('_4t9v.img.sp_f9hR0QNLdFl.sx_bd3f9c')
+        quality_btn.click()
+        quality_list = self.driver.find_elements_by_class_name('_2iw4')[1:]
+        quality_list[0].click()
+        Enlarge_btn = self.driver.find_element_by_class_name('_rwt.img.sp_SbgeWlXTmvI.sx_98139c')
+        Enlarge_btn.click()
+        wait_6 = WebDriverWait(self.driver, 10)
+        element_6 = wait_6.until(EC.presence_of_element_located((By.CLASS_NAME, '_rwt.img.sp_ae630PJHI_w.sx_cf715f')))
+        full_screen_btn = self.driver.find_element_by_class_name('_zbd._39ip._42ft')
+        full_screen_btn.click()
+        setting_btn_close = self.driver.find_element_by_class_name('_132c')
+        setting_btn_close.click()
+    
+    
     def login_continue_pg(self):
         cont_btn_1 = self.driver.find_element_by_xpath('//*[@id="checkpointSubmitButton"]')
         cont_btn_1.click()
