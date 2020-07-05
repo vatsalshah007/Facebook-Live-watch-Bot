@@ -90,7 +90,7 @@ class FB_live_bot():
         quality_list[0].click()
         # Enlarge_btn = self.driver.find_element_by_class_name('_rwt.img.sp_SbgeWlXTmvI.sx_98139c')
         # Enlarge_btn.click()
-        # sleep(4)
+        sleep(4)
         full_screen_btn = self.driver.find_element_by_class_name('_zbd._39ip._42ft')
         full_screen_btn.click()
         setting_btn_close = self.driver.find_element_by_class_name('_132c')
