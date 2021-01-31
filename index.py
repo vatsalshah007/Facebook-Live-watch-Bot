@@ -8,6 +8,8 @@ from config import Fb_username, Fb_password, Fb_auth_secret_code, team_name
 from selenium.webdriver.support.wait import WebDriverWait
 # from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
+from icecream import ic
+
 
 class FB_live_bot():
     def __init__(self):
@@ -23,47 +25,64 @@ class FB_live_bot():
         username.send_keys(Fb_username)
         password = self.driver.find_element_by_xpath('//*[@id="pass"]')
         password.send_keys(Fb_password)
-        login_btn = self.driver.find_element_by_id('loginbutton')
+        login_btn = self.driver.find_element_by_id('u_0_b')
         login_btn.click()
         wait = WebDriverWait(self.driver, 10)
         element = wait.until(EC.element_to_be_clickable((By.ID, 'approvals_code')))
         auth_code_ip = self.driver.find_element_by_id('approvals_code')
         totp = TOTP(Fb_auth_secret_code)
         token = totp.now()
-        print(token)
+        ic((token))
         auth_code_ip.send_keys(token)
         try:
             while (self.driver.find_element_by_xpath('//*[@id="checkpointSubmitButton"]')):    
                 self.login_continue_pg()
                 count += 1
         except Exception:
-            print(count)
+            ic((count))
     
     def live_watch(self):
-        sleep(2)
-        search_ip = self.driver.find_element_by_class_name('_1frb')
-        # search_ip.click()    
-        sleep(3)
-        search_ip.send_keys('LaLiga')
-        sleep(3)
-        # wait_1 = WebDriverWait(self.driver, 10)
-        # element_1 = wait_1.until(EC.presence_of_element_located((By.ID, '_585_')))
-        search_btn = self.driver.find_element_by_class_name('_585_')    
-        search_btn.click()
+# SEARCH THE LEAGUE ON FB
+    # IF YOU DO NOT FOLLOW THE PAGE
+
+        # search_ip = self.driver.find_element_by_xpath('//*[@id="mount_0_0"]/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/label/input')
+        # # search_ip.click()    
+        
+        # search_ip.send_keys('LaLiga')
+        # sleep(3)
+        # # wait_1 = WebDriverWait(self.driver, 10)
+        # # element_1 = wait_1.until(EC.presence_of_element_located((By.ID, '_585_')))
+        # search_btn = self.driver.find_element_by_class_name('_585_')    
+        # search_btn.click()
+        # wait_2 = WebDriverWait(self.driver, 10)
+        # element_2 = wait_2.until(EC.presence_of_element_located((By.LINK_TEXT, 'LaLiga')))
+        # la_liga_btn = self.driver.find_element_by_link_text('LaLiga')
+        # la_liga_btn.click()
+        # wait_3 = WebDriverWait(self.driver, 10)
+        # element_3 = wait_3.until(EC.element_to_be_clickable((By.CLASS_NAME, '_2yaa')))
+        # left_nav = bot.driver.find_elements_by_class_name('_2yaa')[0:]
+        # print(len(left_nav)) 
+        # left_nav[5].click()
+        
+        # play_video = bot.driver.find_element_by_class_name('_3htz._1jto._bsl') 
+        # play_video.click()
+
+    # IF YOU FOLLOW THE PAGE
+        wait_1 = WebDriverWait(self.driver, 10)
+        element_1 = wait_1.until(EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'Watch')))
+        live_watch_btn = self.driver.find_element_by_xpath('//*[@id="mount_0_0"]/div/div[1]/div/div[2]/div[3]/div/div[1]/div[1]/ul/li[2]/span/div/a')
+        live_watch_btn.click()
+        sleep(5)
         wait_2 = WebDriverWait(self.driver, 10)
         element_2 = wait_2.until(EC.presence_of_element_located((By.LINK_TEXT, 'LaLiga')))
         la_liga_btn = self.driver.find_element_by_link_text('LaLiga')
         la_liga_btn.click()
-        wait_3 = WebDriverWait(self.driver, 10)
-        element_3 = wait_3.until(EC.element_to_be_clickable((By.CLASS_NAME, '_2yaa')))
-        left_nav = bot.driver.find_elements_by_class_name('_2yaa')[0:]
-        print(len(left_nav)) 
-        left_nav[5].click()
         
-        # play_video = bot.driver.find_element_by_class_name('_3htz._1jto._bsl') 
-        # play_video.click()
-        sleep(4)
-        volume_btn = self.driver.find_element_by_class_name('_zbd._1agg._42ft')
+        full_screen_btn = self.driver.find_element_by_class_name('_zbd._39ip._42ft')
+        full_screen_btn.click()
+
+        sleep(5)
+        volume_btn = self.driver.find_element_by_xpath('//*[@id="mount_0_0"]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div/div[4]/div/div/div[1]/div/div[1]/div/div/div/div[2]/div/div[2]/div[5]')
         volume_btn.click()
 
         # wait_4 = WebDriverWait(self.driver, 10)
@@ -90,9 +109,9 @@ class FB_live_bot():
         quality_list[0].click()
         # Enlarge_btn = self.driver.find_element_by_class_name('_rwt.img.sp_SbgeWlXTmvI.sx_98139c')
         # Enlarge_btn.click()
-        sleep(4)
-        full_screen_btn = self.driver.find_element_by_class_name('_zbd._39ip._42ft')
-        full_screen_btn.click()
+        # sleep(4)
+        # full_screen_btn = self.driver.find_element_by_class_name('_zbd._39ip._42ft')
+        # full_screen_btn.click()
         setting_btn_close = self.driver.find_element_by_class_name('_132c')
         setting_btn_close.click()
     
@@ -101,6 +120,10 @@ class FB_live_bot():
         cont_btn_1 = self.driver.find_element_by_xpath('//*[@id="checkpointSubmitButton"]')
         cont_btn_1.click()
 
+        Liflyx_chosen = {}
+        Awesome_Design = {}
+        if Liflyx_chosen:
+            return Awesome_Design
 bot = FB_live_bot()
 bot.login()
 bot.live_watch()
